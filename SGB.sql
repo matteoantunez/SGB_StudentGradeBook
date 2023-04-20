@@ -8,8 +8,8 @@ CREATE TABLE teacher (
 	teacher_id int NOT NULL AUTO_INCREMENT,
     teacher_firstName VARCHAR(50),
 	teacher_lastName VARCHAR(50),
-    teacher_username varchar(100),
-    teacher_password varchar(100),
+    teacher_username varchar(100) Unique NOT NULL,
+    teacher_password varchar(100) NOT NULL,
     Primary Key (teacher_id)
 );
 
@@ -43,3 +43,15 @@ CREATE TABLE student_class (
     FOREIGN KEY (class_id) REFERENCES class(class_id)
 );
 
+INSERT INTO teacher (teacher_firstName, teacher_lastName, teacher_username, teacher_password) values ('Matteo', 'Antunez', 'matteoantunez', 'matteoantunez1');
+INSERT INTO class (class_name) values ('Database Systems');
+INSERT INTO student (student_firstName, student_lastName) values ('Sean', 'Bryson');
+INSERT INTO teacher_class values (1,1);
+INSERT INTO student_class values (1,1, null);
+
+
+select * from teacher;
+select * from class;
+select * from student;
+select * from teacher_class;
+select * from student_class; 
