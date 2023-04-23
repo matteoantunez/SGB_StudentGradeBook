@@ -15,7 +15,8 @@ SGB, also known as Student Grade Book, is a Java console-based application that 
     - [X] **Sort the students** by alphabetical order and by their grades
     - [X] **Update a student's grade**
     - [X] **Remove and add** students to a class
-- [X] Data for this project can either be **stored in memory or within a file**
+- [x] Data for this project can either be **stored in memory or within a file**. 
+    - Note: Data is being stored in MySQL for this project
 
 ## Bonus
 - [X] Use **JDBC & DAO** to store the data for this project
