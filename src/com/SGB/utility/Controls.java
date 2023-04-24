@@ -50,6 +50,7 @@ public class Controls {
 		try {
 			while (rs.next()) {
 				id = rs.getInt(1);
+				Controls.menu(scan, conn, id);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -86,5 +87,100 @@ public class Controls {
 		
 		Commands.register(fn, ln, un, pw, conn);
 		
+	}
+	
+	public static void menu(Scanner scan, Connection conn, int id) {
+		int choice = 0;
+		int length;
+		ResultSet rs =  null;
+		String fn = null, ln;
+		
+		rs = Commands.grabUser(id, conn);
+		
+		try {
+			while (rs.next()) {
+				fn = rs.getString(2);
+				ln = rs.getString(3);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		length = fn.length();
+		
+		do {
+			System.out.print("+---------");
+			for (int x = 0; x <= length; x++) {
+				System.out.print('-');
+			}
+			System.out.println('+');
+			System.out.print("| Welcome ");
+			System.out.println(fn + " |");
+			System.out.print("+---------");
+			for (int x = 0; x <= length; x++) {
+				System.out.print('-');
+			}
+			System.out.println('+');
+			System.out.println();
+			
+			System.out.println("Please Select from the following options: \n");
+			System.out.println("""
+					1. View Classes
+					2. Create Class
+					3. Exit""");
+			System.out.println();
+			System.out.print("Choice> ");
+			choice = Integer.parseInt(scan.nextLine());
+			
+			switch(choice) {
+			case 1:
+				Controls.classList(scan, conn, id);
+				break;
+			}
+		
+			
+		} while (choice != 3);
+	}
+	
+	public static void classList (Scanner scan, Connection conn, int id) {
+		System.out.println("""
+				+------------+
+				| Class List |
+				+------------+
+				""");
+		ResultSet rs = Commands.grabClass(id, conn);
+		int choice = 0;
+		
+		try {
+			while (rs.next()) {
+				System.out.println("Class ID: " + rs.getInt(1));
+				System.out.println("Class Name: " + rs.getString(2));
+				System.out.println();
+			}
+			
+			System.out.println("Please Select a class to View: \n");
+			System.out.print("Choice> ");
+			choice = Integer.parseInt(scan.nextLine());
+			System.out.println();
+			
+			Controls.classSummary(scan, conn, choice);
+		} catch (SQLException e) {
+			System.out.println("No Classes Found. Please create a class and try again");
+		}
+		
+		
+	}
+	
+	public static void classSummary(Scanner scan, Connection conn, int choice) {
+		System.out.println("""
+				+---------------+
+				| Class Summary |
+				+---------------+
+				
+				Please Select from the following options:
+				
+				1. 
+				""");
 	}
 }

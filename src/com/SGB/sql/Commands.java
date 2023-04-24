@@ -36,4 +36,32 @@ public class Commands {
 		return rs;
 		
 	}
+	
+	public static ResultSet grabUser(int id, Connection conn) {
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("Select * from Teacher where teacher_id = ?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println("Could not grab user, please check user_id and try again");
+		}
+		
+		return rs;
+	}
+	
+	public static ResultSet grabClass(int id, Connection conn) {
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("Select teacher_id, class.class_id, class_name from teacher_class, class where teacher_id = ? and teacher_class.class_id = class.class_id");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println("Error Grabbing Classes. Please Check you query and try again.");
+		}
+		
+		return rs;
+	}
 }
