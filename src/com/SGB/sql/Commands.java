@@ -70,11 +70,12 @@ public class Commands {
 		ResultSet rs = null;
 		
 		try {
-			PreparedStatement stmt = conn.prepareStatement("select student_id, student_firstName, student_lastName, grades from student, student_class where student.student_id = student_class.student_id AND class_id = ? order by student_lastName asc");
+			PreparedStatement stmt = conn.prepareStatement("select student.student_id, student_firstName, student_lastName, grades from student, student_class where student.student_id = student_class.student_id AND class_id = ? order by student_lastName asc");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 		} catch (Exception e) {
 			System.out.println("Error Grabbing Roster, please try again");
+			e.printStackTrace();
 		}
 		
 		return rs;
