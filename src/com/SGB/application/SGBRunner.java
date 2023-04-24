@@ -1,6 +1,7 @@
 package com.SGB.application;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.SGB.connection.SQLConnection;
@@ -30,5 +31,12 @@ public class SGBRunner {
 		} while (choice != 3);
 		
 		System.out.println("Thanks for using SGB! Goodbye");
+		scan.close();
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
